@@ -190,13 +190,15 @@ export const cache = prettierCache
  */
 export const getStatus = function() {
   const { keys } = prettierCache
+
   if (keys.length === 0) {
     return 'No instances cached.'
   }
-  if (keys.length === 1) {
-    return 'One instance cached.'
-  }
-  return `${keys.length} instances cached.`
+
+  return '\n' + keys.map(k => {
+    const instance = cache.get(k) as CacheInstance;
+    return `- ${k}: Prettier Version ${instance.prettier.version}`;
+  }).join('\n') + '\n';
 }
 
 export interface CacheInstance {
