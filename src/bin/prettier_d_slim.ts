@@ -14,7 +14,7 @@ function main() {
     console.log(
       'v%s (prettier_d_slim v%s)',
       require('prettier/package.json').version,
-      require('../package.json').version,
+      require('../../package.json').version,
     )
 
     return
