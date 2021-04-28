@@ -28,7 +28,7 @@
     "core_d": "^1.0.1",
     "minimist": "^1.2.0",
     "nanolru": "^1.0.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "resolve": "^1.8.1"
   },
   "files": [

@@ -75,10 +75,10 @@ function parseArguments(args: string[]) {
         'single-quote': false,
         'quote-props': 'as-needed',
         'jsx-single-quote': false,
-        'trailing-comma': 'none',
+        'trailing-comma': 'es5',
         'bracket-spacing': true,
         'jsx-bracket-same-line': false,
-        'arrow-parens': 'avoid',
+        'arrow-parens': 'always',
         'range-start': 0,
         'range-end': Infinity,
         'require-pragma': false,
@@ -86,7 +86,7 @@ function parseArguments(args: string[]) {
         'prose-wrap': 'preserve',
         'html-whitespace-sensitivity': 'css',
         'vue-indent-script-and-style': false,
-        'end-of-line': 'auto',
+        'end-of-line': 'lf',
       },
     }) as Options & {
       // Added by prettier_d_slim.
@@ -124,7 +124,7 @@ declare module 'prettier' {
 /**
  * The core_d service entry point.
  */
-export const invoke = function(
+export const invoke = function (
   cwd: string,
   args: string[],
   text: string,
@@ -188,17 +188,23 @@ export const cache = prettierCache
 /**
  * The core_d status hook.
  */
-export const getStatus = function() {
+export const getStatus = function () {
   const { keys } = prettierCache
 
   if (keys.length === 0) {
     return 'No instances cached.'
   }
 
-  return '\n' + keys.map(k => {
-    const instance = cache.get(k) as CacheInstance;
-    return `- ${k}: Prettier Version ${instance.prettier.version}`;
-  }).join('\n') + '\n';
+  return (
+    '\n' +
+    keys
+      .map((k) => {
+        const instance = cache.get(k) as CacheInstance
+        return `- ${k}: Prettier Version ${instance.prettier.version}`
+      })
+      .join('\n') +
+    '\n'
+  )
 }
 
 export interface CacheInstance {
